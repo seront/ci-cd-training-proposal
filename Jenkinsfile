@@ -5,6 +5,7 @@ pipeline {
         stage('Test'){
             steps{
                 echo '---- Executing tests ------'
+                sh 'npm i'
                 sh 'npm run test'
             }
         }
