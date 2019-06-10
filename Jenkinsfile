@@ -1,9 +1,11 @@
 pipeline {
     agent any
+    tools {nodejs "node1"} // Nombre de la instalacion de Jenkins
     stages{
-        stage('Build'){
+        stage('Test'){
             steps{
-                echo 'Buscando el codigo'
+                echo '---- Executing tests ------'
+                sh 'npm run test'
             }
         }
     }
