@@ -1,13 +1,37 @@
 pipeline {
+       environment {
+    registry = "seront/node-test"
+    registryCredential = 'dockerhub-seront'
+    dockerImage = ''
+}
     agent any
-    tools {nodejs "node1"} // Nombre de la instalacion de Jenkins
-    stages{
-        stage('Test'){
-            steps{
-                echo '---- Executing tests ------'
-                sh 'npm i'
-                sh 'npm run test'
-            }
-        }
+stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/seront/ci-cd-training-proposal.git'
+      }
     }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+}
+    
 }
