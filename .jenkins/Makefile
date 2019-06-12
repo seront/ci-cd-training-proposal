@@ -8,7 +8,7 @@ create-data:
 	@docker volume create $(log)
 	@docker volume create $(data)
 run-jenkins: create-data
-	@docker run -p 8080:8080 -p 50000:50000 --name=$(jenkins) --mount source=$(log),target=/var/log/jenkins --mount source=$(data),target=/var/jenkins_home -d $(jenkins)
+	@docker run -p 8080:8080 -p 50000:50000 --name=$(jenkins) --mount source=$(log),target=/var/log/jenkins --mount source=$(data),target=/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -d $(jenkins)
 stop-jenkins:
 	-docker stop $(jenkins)
 clean-jenkins:	stop-jenkins
