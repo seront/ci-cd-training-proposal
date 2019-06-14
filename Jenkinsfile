@@ -6,9 +6,27 @@ pipeline {
 }
     agent any
 stages {
-    stage('Cloning Git') {
+    tools {
+    nodejs 'default-nodejs'
+  }
+  stages {
+    stage('Startup') {
       steps {
-        git 'https://github.com/seront/ci-cd-training-proposal.git'
+        script {
+          sh 'npm install'
+        }
+      }
+    }
+    stage('Test') {
+      steps {
+        script {
+          sh 'npm run test'
+        }
+      }
+      post {
+        always {
+          step([$class: 'CoberturaPublisher', coberturaReportFile: 'output/coverage/jest/cobertura-coverage.xml'])
+        }
       }
     }
     /**stage('Building image') {
