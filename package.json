@@ -7,7 +7,7 @@
 		"start": "node index",
 		"start:docker": "pm2-docker index.config.js --no-daemon",
 		"start:dev": "nodemon",
-		"test": "jest --coverage --coverageDirectory=output/coverage/jest",
+		"test": "jest --coverage --coverageDirectory=./output/coverage/jest",
 		"lint": "eslint ."
 	},
 	"private": true,
