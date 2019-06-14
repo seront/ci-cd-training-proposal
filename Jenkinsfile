@@ -11,7 +11,7 @@ stages {
         git 'https://github.com/seront/ci-cd-training-proposal.git'
       }
     }
-    stage('Building image') {
+    /**stage('Building image') {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
@@ -31,7 +31,7 @@ stages {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
-    }
+    }*/
 }
     
 }
