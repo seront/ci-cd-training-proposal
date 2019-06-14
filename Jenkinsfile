@@ -5,10 +5,10 @@ pipeline {
     dockerImage = ''
 }
     agent any
-stages {
-    tools {
-    nodejs 'default-nodejs'
+     tools {
+    nodejs 'node1'
   }
+   
   stages {
     stage('Startup') {
       steps {
