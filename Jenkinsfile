@@ -67,7 +67,7 @@ pipeline {
       //   branch 'master'
       // }
       steps{
-        // sh 'echo Hacer el despliegue en produccion'
+        sh 'echo Hacer el despliegue en produccion'
         // sh 'docker login --username=seront.nmmc@gmail.com --password=$(heroku auth:token) registry.heroku.com'
         // sh "docker push $registry:$BUILD_NUMBER"
         script {
