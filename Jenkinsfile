@@ -67,14 +67,14 @@ pipeline {
       //   branch 'master'
       // }
       steps{
-        sh 'echo Hacer el despliegue en produccion'
-        sh 'docker login --username=seront.nmmc@gmail.com --password=$(heroku auth:token) registry.heroku.com'
-        sh "docker push $registry:$BUILD_NUMBER"
-        // script {
-        //   docker.withRegistry( '', registryHerokuCredential ) {
-        //     dockerImage.push()
-        //   }
-        // }
+        // sh 'echo Hacer el despliegue en produccion'
+        // sh 'docker login --username=seront.nmmc@gmail.com --password=$(heroku auth:token) registry.heroku.com'
+        // sh "docker push $registry:$BUILD_NUMBER"
+        script {
+          docker.withRegistry( 'registry.heroku.com', registryHerokuCredential ) {
+            dockerImage.push()
+          }
+        }
       }
     }
     stage('Remove Unused docker image') {
