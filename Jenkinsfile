@@ -67,7 +67,7 @@ pipeline {
       // }
       steps{
         sh 'echo Hacer el despliegue en produccion'
-        sh 'docker push registry.heroku.com/seront-node-test-1/image'
+        sh 'docker push $registry:$BUILD_NUMBER'
       }
     }
     stage('Remove Unused docker image') {
