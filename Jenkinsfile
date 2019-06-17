@@ -2,6 +2,7 @@ pipeline {
        environment {
     registry = "seront/node-test"
     registryCredential = 'dockerhub-seront'
+    registryHerokuCredential = 'heroku-seront'
     dockerImage = ''
 }
     agent any
@@ -67,7 +68,13 @@ pipeline {
       // }
       steps{
         sh 'echo Hacer el despliegue en produccion'
-        sh 'docker push $registry:$BUILD_NUMBER'
+        sh 'docker login --username=seront.nmmc@gmail.com --password=$(heroku auth:token) registry.heroku.com'
+        sh "docker push $registry:$BUILD_NUMBER"
+        // script {
+        //   docker.withRegistry( '', registryHerokuCredential ) {
+        //     dockerImage.push()
+        //   }
+        // }
       }
     }
     stage('Remove Unused docker image') {
