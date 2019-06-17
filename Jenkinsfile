@@ -17,6 +17,15 @@ pipeline {
         }
       }
     }
+    stage('Dependencies test') {
+      steps {
+        script {
+          sh 'npm install -g snyk'
+          sh 'snyk auth 6b788178-c98c-4491-bddf-63f278bdb9c4'
+          sh 'snyk test'
+        }
+      }
+    }
     stage('Test') {
       steps {
         script {
@@ -29,14 +38,20 @@ pipeline {
         }
       }
     }
-    /**stage('Building image') {
+    stage('Building image') {
+      when {
+        branch 'develop'
+      }
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Deploy Develop') {
+      when {
+        branch 'develop'
+      }
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -46,10 +61,21 @@ pipeline {
       }
     }
     stage('Remove Unused docker image') {
+      when {
+        branch 'develop'
+      }
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
-    }*/
+    }
+    stage('Deploy in production'){
+      when {
+        branch 'master'
+      }
+      steps{
+        sh 'echo Hacer el despliegue en produccion'
+      }
+    }
 }
     
 }
