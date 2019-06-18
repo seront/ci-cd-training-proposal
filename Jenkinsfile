@@ -4,6 +4,7 @@ pipeline {
     registryCredential = 'dockerhub-seront'
     registryHerokuCredential = 'heroku-seront'
     dockerImage = ''
+    herokuImage = ''
 
 }
     agent any
@@ -74,8 +75,8 @@ pipeline {
         script {
           docker.withRegistry( 'https://registry.heroku.com', registryHerokuCredential ) {
             // dockerImage.push('registry.heroku.com/seront-node-test-1/image')
-            dockerImage = docker.build + 'registry.heroku.com/seront-node-test-1/image'
-            dockerImage.push()
+            herokuImage = docker.build + 'registry.heroku.com/seront-node-test-1/image'
+            herokuImage.push()
           }
         }
       }
