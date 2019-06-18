@@ -71,7 +71,7 @@ pipeline {
         // sh 'docker login --username=seront.nmmc@gmail.com --password=$(heroku auth:token) registry.heroku.com'
         // sh "docker push $registry:$BUILD_NUMBER"
         script {
-          docker.withRegistry( 'registry.heroku.com', registryHerokuCredential ) {
+          docker.withRegistry( 'https://registry.heroku.com', registryHerokuCredential ) {
             dockerImage.push('registry.heroku.com/seront-node-test-1/image')
           }
         }
