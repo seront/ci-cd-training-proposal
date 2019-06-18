@@ -62,14 +62,14 @@ pipeline {
       }
     }
     
-    stage('Deploy in production'){
+    stage('Deploy in production (Heroku)'){
       // when {
       //   branch 'master'
       // }
       steps{
-        sh 'echo Hacer el despliegue en produccion'
-        // sh 'docker login --username=seront.nmmc@gmail.com --password=$(heroku auth:token) registry.heroku.com'
-        // sh "docker push $registry:$BUILD_NUMBER"
+        // sh 'docker login --username=seront.nmmc@gmail.com --password-stdin https://registry.heroku.com'
+        // sh "docker push registry.heroku.com/seront-node-test-1/image"
+        sh 'docker logout https://hub.docker.com'
         script {
           docker.withRegistry( 'https://registry.heroku.com', registryHerokuCredential ) {
             dockerImage.push('registry.heroku.com/seront-node-test-1/image')
