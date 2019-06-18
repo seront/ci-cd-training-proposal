@@ -5,6 +5,7 @@ pipeline {
     registryHerokuCredential = 'heroku-seront'
     dockerImage = ''
     herokuImage = ''
+    herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
 
 }
     agent any
@@ -69,24 +70,23 @@ pipeline {
       //   branch 'master'
       // }
       steps{
-        // sh 'echo "$HEROKU_PASS" | docker login --username=seront.nmmc@gmail.com --password-stdin https://registry.heroku.com'
-        // sh "docker push registry.heroku.com/seront-node-test-1/image"
-
         script {
           docker.withRegistry( 'https://registry.heroku.com', registryHerokuCredential ) {
             // dockerImage.push('registry.heroku.com/seront-node-test-1/image')
-            herokuImage = docker.build 'registry.heroku.com/seront-node-test-1/image'
+            herokuImage = docker.build herokuRegistry + ':$BUILD_NUMBER'
             herokuImage.push()
           }
         }
+        sh 'heroku container:release web'
       }
     }
     stage('Remove Unused docker image') {
-      when {
-        branch 'develop'
-      }
+      // when {
+      //   branch 'develop'
+      // }
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $herokuRegistry:$BUILD_NUMBER"
       }
     }
 }
