@@ -73,7 +73,8 @@ pipeline {
 
         script {
           docker.withRegistry( 'https://registry.heroku.com', registryHerokuCredential ) {
-            dockerImage.push('registry.heroku.com/seront-node-test-1/image')
+            // dockerImage.push('registry.heroku.com/seront-node-test-1/image')
+            dockerImage.push('seront-node-test-1/image')
           }
         }
       }
