@@ -49,18 +49,18 @@ pipeline {
         }
       }
     }
-    // stage('Deploy Develop') {
-    //   // when {
-    //   //   branch 'develop'
-    //   // }
-    //   steps{
-    //     script {
-    //       docker.withRegistry( '', registryCredential ) {
-    //         dockerImage.push()
-    //       }
-    //     }
-    //   }
-    // }
+    stage('Deploy Develop') {
+      // when {
+      //   branch 'develop'
+      // }
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
     
     stage('Deploy in production'){
       // when {
