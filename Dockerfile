@@ -7,5 +7,5 @@ WORKDIR /root/app
 RUN npm i --no-package-lock 
 RUN npm run test
 #RUN npm run start
-
+EXPOSE 3000
 CMD npm run start

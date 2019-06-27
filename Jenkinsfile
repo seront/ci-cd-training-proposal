@@ -77,7 +77,7 @@ pipeline {
             herokuImage.push()
           }
         }
-        sh 'heroku container:release web'
+        sh 'heroku container:release image -a=seront-node-test-1'
       }
     }
     stage('Remove Unused docker image') {
