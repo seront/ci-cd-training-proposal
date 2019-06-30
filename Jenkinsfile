@@ -5,7 +5,8 @@ pipeline {
     registryHerokuCredential = 'heroku-seront'
     dockerImage = ''
     herokuImage = ''
-    herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
+    // herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
+    herokuRegistry = 'registry.heroku.com/seront-node-test-1/worker'
 
 }
     agent any
