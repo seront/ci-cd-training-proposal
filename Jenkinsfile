@@ -5,9 +5,9 @@ pipeline {
     registryHerokuCredential = 'heroku-seront'
     dockerImage = ''
     herokuImage = ''
-    // herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
+    herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
     // herokuRegistry = 'registry.heroku.com/seront-node-test-1/worker'
-    herokuRegistry = 'registry.heroku.com/seront-node-test-1/image'
+    // herokuRegistry = 'registry.heroku.com/seront-node-test-1/image'
 
 }
     agent any
@@ -79,7 +79,9 @@ pipeline {
             herokuImage.push()
           }
         }
+        sh 'heroku login'
         sh 'heroku container:release image -a=seront-node-test-1'
+        sh 'heroku ps:scale web=1 -a=seront-node-test-1'
       }
     }
     stage('Remove Unused docker image') {
