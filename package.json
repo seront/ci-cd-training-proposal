@@ -4,7 +4,7 @@
 	"description": "Simple API dedicated to DevOps training",
 	"main": "index.js",
 	"scripts": {
-		"start": "node index",
+		"start": "PORT=3000 node index",
 		"start:docker": "pm2-docker index.config.js --no-daemon",
 		"start:dev": "nodemon",
 		"test": "jest --coverage --coverageDirectory=./output/coverage/jest",

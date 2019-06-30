@@ -10,7 +10,8 @@ const CategoriesSchema = require('./categories.schema')
 const Swagger = require('./swagger')
 const SwaggerUi = require('./swagger-ui')
 
-const Port = 3000
+// const Port = 3000
+const Port = process.env.PORT
 const Host = '0.0.0.0'
 const Server = Hapi.server({ compression: false, port: Port, host: Host })
 
