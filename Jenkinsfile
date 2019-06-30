@@ -6,7 +6,8 @@ pipeline {
     dockerImage = ''
     herokuImage = ''
     // herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
-    herokuRegistry = 'registry.heroku.com/seront-node-test-1/worker'
+    // herokuRegistry = 'registry.heroku.com/seront-node-test-1/worker'
+    herokuRegistry = 'registry.heroku.com/seront-node-test-1/image'
 
 }
     agent any
@@ -74,7 +75,7 @@ pipeline {
         script {
           docker.withRegistry( 'https://registry.heroku.com', registryHerokuCredential ) {
             // dockerImage.push('registry.heroku.com/seront-node-test-1/image')
-            herokuImage = docker.build herokuRegistry + ':$BUILD_NUMBER'
+            herokuImage = docker.build herokuRegistry + ':latest'
             herokuImage.push()
           }
         }
