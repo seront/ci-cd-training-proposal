@@ -6,9 +6,6 @@ pipeline {
     dockerImage = ''
     herokuImage = ''
     herokuRegistry = 'registry.heroku.com/seront-node-test-1/web'
-    // herokuRegistry = 'registry.heroku.com/seront-node-test-1/worker'
-    // herokuRegistry = 'registry.heroku.com/seront-node-test-1/image'
-
 }
     agent any
      tools {
