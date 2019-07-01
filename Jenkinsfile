@@ -90,7 +90,7 @@ pipeline {
       // }
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
-        //sh "docker rmi $herokuRegistry:$BUILD_NUMBER"
+        sh "docker rmi $herokuRegistry:$BUILD_NUMBER"
       }
     }
 }
